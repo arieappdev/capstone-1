@@ -15,19 +15,19 @@ public class App {
             boolean running = true;
             while (running) {
                 showMainMenu();
-                String selectedMenuOption = scanner.nextLine();
+                String selectedMenuOption = scanner.nextLine().toUpperCase();
 
                 switch (selectedMenuOption) {
-                    case "1":
+                    case "D":
                         addDeposit();
                         break;
-                    case "2":
+                    case "P":
                         makePayment();
                         break;
-                    case "3":
+                    case "L":
                         showLedgerMenu();
                         break;
-                    case "4":
+                    case "X":
                         System.out.println("See ya next time! ");
                         running = false;
                         break;
@@ -43,11 +43,11 @@ public class App {
     public static void showMainMenu() {
         System.out.println("Welcome To The Money Matrix :) ");
         System.out.println("---------------------");
-        System.out.println("\nHow can we assist you?");
-        System.out.println(" 1) Add Deposit");
-        System.out.println(" 2) Make Payment");
-        System.out.println(" 3) Ledger");
-        System.out.println(" 4) Exit");
+        System.out.println("\nHow may we assist you?");
+        System.out.println(" D) Add Deposit");
+        System.out.println(" P) Make Payment");
+        System.out.println(" L) Ledger");
+        System.out.println(" X) Exit");
         System.out.print("Enter here: ");
     }
 
@@ -57,7 +57,7 @@ public class App {
     }
 
     public static void writeTransaction(String description, String vendor, double amount, String accountType) {
-        try (FileWriter fw = new FileWriter("transactions.csv", true)) {
+        try (FileWriter fw = new FileWriter("src/data/transactions.csv", true)) {
             try (BufferedWriter bw = new BufferedWriter(fw)) {
 
                 LocalDateTime now = LocalDateTime.now();
@@ -110,17 +110,17 @@ public class App {
             System.out.println("\nLedger");
             System.out.println("---------------------");
             System.out.println("\nWhat ledger would you like to view?");
-            System.out.println("1- All");
-            System.out.println("2- Deposits ");
-            System.out.println("3- Payments ");
-            System.out.println("4- Reports ");
-            System.out.println("5- Return to the Main Menu.");
+            System.out.println("A- All");
+            System.out.println("D- Deposits ");
+            System.out.println("P- Payments ");
+            System.out.println("R- Reports ");
+            System.out.println("L- Return to the Ledger Menu.");
             System.out.println("Enter here: ");
 
             String selectedMenuOption = scanner.nextLine();
 
             switch (selectedMenuOption) {
-                case "1":
+                case "A":
                     //may need to go in Ledger window
                     runAll();
                     break;
