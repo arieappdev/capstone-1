@@ -1,3 +1,41 @@
-date|time|description|vendor|amount
-2023-04-15|10:13:25|ergonomic keyboard|Amazon|-89.50
-2023-04-15|11:15:00|Invoice 1001 paid|Joe|1500.00
+date|time|description|vendor|amount|account_type
+2025-04-21|09:15|Grocery Run|Trader Joe's|54.29|Checking
+2025-04-21|13:45|Lunch Out|Panera Bread|12.75|Checking
+2025-04-22|18:30|Amazon Order|Amazon.com|102.50|Savings
+2025-04-22|10:00|Coffee|Starbucks|4.50|Checking
+2025-04-23|08:10|Gas Refill|Shell Station|42.00|Checking
+2025-04-23|19:00|Streaming Subscription|Netflix|15.99|Checking
+2025-04-24|11:00|New Shoes|DSW|89.99|Checking
+2025-04-24|14:30|Tech Accessories|Best Buy|35.00|Savings
+2025-04-25|16:20|Dinner Out|Olive Garden|47.20|Checking
+2025-04-25|07:45|Morning Coffee|Dunkin'|3.25|Checking
+2025-04-26|12:00|Public Transit|CATS Bus|2.25|Checking
+2025-04-26|18:45|Beauty Supplies|Ulta|58.70|Savings
+2025-04-27|15:00|Fast Food|Taco Bell|9.85|Checking
+2025-04-27|17:20|Grocery Delivery|Instacart|78.10|Checking
+2025-04-28|10:10|Dog Food|PetSmart|36.90|Checking
+2025-04-28|20:00|Laundry|Local Laundromat|7.50|Checking
+2025-04-28|14:30|Cleaning Supplies|Walmart|23.40|Checking
+2025-04-28|11:50|Phone Accessories|Apple Store|65.00|Savings
+2025-04-28|09:00|Gas|Exxon|39.50|Checking
+2025-04-28|16:30|Online Class|Udemy|19.99|Savings
+2025-04-21|07:30|Monthly Rent|Sunrise Apartments|1350.00|Checking
+2025-04-21|12:00|Health Insurance Premium|Blue Cross Blue Shield|245.67|Savings
+2025-04-21|18:10|Grocery Store Visit|Trader Joe's|92.15|Checking
+2025-04-22|09:00|Car Insurance Payment|Geico|110.45|Savings
+2025-04-22|16:30|Student Loan Payment|Navient|300.00|Checking
+2025-04-23|11:00|Credit Card Payment|Chase|500.00|Checking
+2025-04-23|13:45|Phone Bill Payment|Verizon|85.99|Checking
+2025-04-23|17:20|Work Shoes Purchase|DSW|75.00|Checking
+2025-04-24|08:00|Coffee Machine Purchase|Target|49.99|Savings
+2025-04-24|15:30|Public Transportation Pass|Charlotte Transit|88.00|Checking
+2025-04-24|20:00|Professional Certification Fee|CompTIA|349.00|Savings
+2025-04-25|10:15|Gym Membership|LA Fitness|45.99|Checking
+2025-04-25|14:00|Electricity Bill|Duke Energy|97.35|Checking
+2025-04-26|09:20|Charity Donation|Red Cross|50.00|Savings
+2025-04-26|13:50|Pet Food & Supplies|Chewy|62.10|Checking
+2025-04-26|18:40|Annual Eye Exam|LensCrafters|120.00|Savings
+2025-04-27|11:05|New Work Clothes|Express|140.75|Checking
+2025-04-27|15:15|Groceries|Publix|75.88|Checking
+2025-04-28|08:30|Home Internet Bill|Spectrum|74.99|Checking
+2025-04-28|12:45|Office Supplies|Staples|35.22|Savings
