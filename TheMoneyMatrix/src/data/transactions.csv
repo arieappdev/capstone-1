@@ -39,3 +39,8 @@ date|time|description|vendor|amount|account_type
 2025-04-27|15:15|Groceries|Publix|75.88|Checking
 2025-04-28|08:30|Home Internet Bill|Spectrum|74.99|Checking
 2025-04-28|12:45|Office Supplies|Staples|35.22|Savings
+2025-04-29|12:47|Deposit|Grandma|40.00|savings
+2025-04-29|14:21|Deposit|Grandma|400.00|savings
+2025-04-29|15:40|Deposit|Grandma|20.00|savings
+2025-04-29|15:56|Deposit|grandma|20.00|savings
+2025-04-29|16:05|Payment|grandma|-50.00|checking

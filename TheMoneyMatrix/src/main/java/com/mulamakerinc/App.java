@@ -17,7 +17,7 @@ public class App {
                 showMainMenu();
                 String selectedMenuOption = scanner.nextLine().toUpperCase();
 
-                switch (selectedMenuOption) {
+                switch (selectedMenuOption.toUpperCase()) {
                     case "D":
                         addDeposit();
                         break;
@@ -90,7 +90,7 @@ public class App {
 
         System.out.print("Is this for checking or savings? ");
         String accountType = scanner.nextLine();
-
+    // use for make payment to write payment to file
         writeTransaction("Deposit", vendor, amount, accountType);
 
         promptReturnToMainMenu();
@@ -99,8 +99,19 @@ public class App {
     public static void makePayment() {
         System.out.println("\nMake Payment");
         System.out.println("---------------------");
-        System.out.println();
-        System.out.println();
+
+        System.out.println("Please enter your payment amount: ");
+        double amount = Double.parseDouble(scanner.nextLine());
+        // setting amount to absolute value with a negative so that
+        // even if you forget the negative it will read as negative
+        amount = Math.abs(amount);
+        amount = -amount;
+        System.out.print("Enter vendor (where it's from): ");
+        String vendor = scanner.nextLine();
+
+        String accountType = "checking";
+        // use for make payment to write payment to file
+        writeTransaction("Payment", vendor, amount, accountType);
         promptReturnToMainMenu();
     }
 
@@ -119,22 +130,22 @@ public class App {
 
             String selectedMenuOption = scanner.nextLine();
 
-            switch (selectedMenuOption) {
+            switch (selectedMenuOption.toUpperCase()) {
                 case "A":
                     //may need to go in Ledger window
                     runAll();
                     break;
-                case "2":
+                case "D":
                     //may need to go in ledger window
                     runDeposits();
                     break;
-                case "3":
+                case "P":
                     runPayments();
                     break;
-                case "4":
+                case "R":
                     runReports();
                     break;
-                case "5":
+                case "L":
                     running = false;
                     break;
                 default:
@@ -180,7 +191,7 @@ public class App {
 //            System.out.println();
 //            System.out.println();
 //            promptReturnToLedgerMenu();
-//            }
+//            } month to date etc.
             }
         }
 

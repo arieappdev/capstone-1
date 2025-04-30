@@ -33,21 +33,30 @@ public class Ledger {
     }
 
     public String getVendor() {
-        return vendor();
+        return vendor;
     }
 
     public String getDescription() {
-        return description();
+        return description;
     }
     public String goToCsv() {
         DateTimeFormatter ledgerFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd|HH:mm");
-        return String.format("%s | %s | %s | %.2f", localDateTime.format(ledgerFormatter), getLocalDateTime(),
-        getDescription(), getVendor(), getAmount(), getAccountType();
+        return String.format("%s | %s | %s | %.2f | %s ", localDateTime.format(ledgerFormatter),
+        getDescription(), getVendor(), getAmount(), getAccountType());
     }
-    @Override
-    public String toString() {
-        return String.format("Date: %s, %s, Description: %s, Vendor: %s. Amount: %.2f, " +
-        "localDateTime.format(DateTimeFormatter.ofPattern(""yyyy-MM-dd HH:mm")),
-        description, vendor, amount);
+//    @Override
+//    public String toString() {
+//        return String.format("Date: %s, %s, Description: %s, Vendor: %s. Amount: %.2f, " ,
+//        localDateTime.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"),
+//        description, vendor, amount);
+////    }
+@Override
+public String toString() {
+    DateTimeFormatter ledgerFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd|HH:mm");
+    return "Date: " + localDateTime.format(ledgerFormatter)
+            + "Description: " + description
+            + "Vendor: "+ vendor
+            + "Amount: " + String.format(
+            "%.2f", amount);
     }
 }
