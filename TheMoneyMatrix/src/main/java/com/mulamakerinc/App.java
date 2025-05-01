@@ -267,22 +267,41 @@ public class App {
     }
 
     // Try/catch and or buffered reader to pull info from the transaction.csv file
+    //START HERE WITH CRAIG
     private static void runMonthToDate() {
         System.out.println("\nMONTH TO DATE");
         System.out.println("---------------------");
 
         List<String[]> transactions = readAllTransactions();
 
-        String currentMonth = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM"));
+        String currentMonth = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
 
         for (String[] t : transactions) {
-            String date = t[0]; // "2025-04-28"
-            if (date.startsWith(currentMonth)) {
+            String dateField = t[0].trim();
+
+            // If date includes time, split it
+            String dateOnly = dateField.contains(" ") ? dateField.split(" ")[0] : dateField;
+
+            if (dateOnly.startsWith(currentMonth)) {
                 printTransaction(t);
             }
         }
         promptReturnToLedgerMenu();
     }
+//    private static void runMonthToDate() {
+//        System.out.println("\nMONTH TO DATE");
+//        System.out.println("---------------------");
+//
+//        List<String[]> transactions = readAllTransactions();
+//        String currentMonth = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM"));
+//        for (String[] t : transactions) {
+//            String date = t[0].trim();
+//            if (date.startsWith(currentMonth)) {
+//                printTransaction(t);
+//            }
+//        }
+//        promptReturnToLedgerMenu();
+//    }
 
     //delete if it doesn't work
     private static void printTransaction(String[] t) {
