@@ -128,7 +128,6 @@ public class App {
             System.out.println("D) Deposits");
             System.out.println("P) Payments ");
             System.out.println("R) Reports ");
-            // new reports screen but not sure where it goes
             System.out.println("H) Home ");
             System.out.println("Enter here: ");
 
@@ -288,22 +287,7 @@ public class App {
         }
         promptReturnToLedgerMenu();
     }
-//    private static void runMonthToDate() {
-//        System.out.println("\nMONTH TO DATE");
-//        System.out.println("---------------------");
-//
-//        List<String[]> transactions = readAllTransactions();
-//        String currentMonth = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM"));
-//        for (String[] t : transactions) {
-//            String date = t[0].trim();
-//            if (date.startsWith(currentMonth)) {
-//                printTransaction(t);
-//            }
-//        }
-//        promptReturnToLedgerMenu();
-//    }
 
-    //delete if it doesn't work
     private static void printTransaction(String[] t) {
     }
 
