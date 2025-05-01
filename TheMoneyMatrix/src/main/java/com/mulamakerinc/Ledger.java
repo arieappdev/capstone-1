@@ -12,44 +12,52 @@ public class Ledger {
     private double amount;
     private String accountType;
 
-    public Ledger(LocalDateTime localDateTime, String accountType, double amount, String vendor, String description) {
-        this.localDateTime = localDateTime;
-        this.accountType = accountType;
-        this.amount = amount;
-        this.vendor = vendor;
-        this.description = description;
-    }
-
     public LocalDateTime getLocalDateTime() {
         return localDateTime;
     }
 
-    public String getAccountType() {
-        return accountType;
+    public void setLocalDateTime(LocalDateTime localDateTime) {
+        this.localDateTime = localDateTime;
     }
 
-    public double getAmount() {
-        return amount;
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public String getVendor() {
         return vendor;
     }
 
-    public String getDescription() {
-        return description;
+    public void setVendor(String vendor) {
+        this.vendor = vendor;
     }
+
+    public double getAmount() {
+        return amount;
+    }
+
+    public void setAmount(double amount) {
+        this.amount = amount;
+    }
+
+    public String getAccountType() {
+        return accountType;
+    }
+
+    public void setAccountType(String accountType) {
+        this.accountType = accountType;
+    }
+
     public String goToCsv() {
         DateTimeFormatter ledgerFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd|HH:mm");
         return String.format("%s | %s | %s | %.2f | %s ", localDateTime.format(ledgerFormatter),
         getDescription(), getVendor(), getAmount(), getAccountType());
     }
-//    @Override
-//    public String toString() {
-//        return String.format("Date: %s, %s, Description: %s, Vendor: %s. Amount: %.2f, " ,
-//        localDateTime.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"),
-//        description, vendor, amount);
-////    }
+
 @Override
 public String toString() {
     DateTimeFormatter ledgerFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd|HH:mm");

@@ -1,4 +1,13 @@
-date|time|description|vendor|amount|account_type
+2022-08-14|09:30|Grocery Trip|Aldi|43.75|checking
+2022-12-02|15:45|Online Subscription|Spotify|9.99|savings
+2023-01-18|11:00|Coffee|Starbucks|4.50|checking
+2023-05-25|18:20|Dinner Out|Red Lobster|62.30|checking
+2023-09-10|13:15|Tech Purchase|Best Buy|149.99|savings
+2023-12-30|16:00|Electric Bill|Duke Energy|-112.78|checking
+2024-02-14|08:00|Valentine's Gift|Target|27.00|checking
+2024-04-03|20:45|Streaming Service|Netflix|15.49|savings
+2024-06-01|10:10|Haircut|Supercuts|28.00|checking
+2024-07-22|12:35|Car Gas|Shell|41.20|checking
 2025-04-21|09:15|Grocery Run|Trader Joe's|54.29|Checking
 2025-04-21|13:45|Lunch Out|Panera Bread|12.75|Checking
 2025-04-22|18:30|Amazon Order|Amazon.com|102.50|Savings
@@ -44,3 +53,10 @@ date|time|description|vendor|amount|account_type
 2025-04-29|15:40|Deposit|Grandma|20.00|savings
 2025-04-29|15:56|Deposit|grandma|20.00|savings
 2025-04-29|16:05|Payment|grandma|-50.00|checking
+2025-04-30|11:57|Payment|gas|-20.00|checking
+2025-04-30|23:08|Deposit|Year Up United|50.00|savings
+2025-04-30|23:09|Payment|Spotify|-10.00|checking
+2025-05-01|02:05|Deposit|Wisely|50.00|savings
+2025-05-01|02:07|Payment|NCL|-50.00|checking
+2025-05-01|02:56|Deposit|Eclecting Boutique|150.00|checking
+2025-05-01|02:57|Payment|gas|-30.50|checking

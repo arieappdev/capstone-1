@@ -1,11 +1,12 @@
 package com.mulamakerinc;
 
-import java.io.BufferedWriter;
-import java.io.FileWriter;
+import java.io.*;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 import java.util.Scanner;
-
 
 public class App {
     private static final Scanner scanner = new Scanner(System.in);
@@ -57,8 +58,8 @@ public class App {
     }
 
     public static void writeTransaction(String description, String vendor, double amount, String accountType) {
-        try (FileWriter fw = new FileWriter("src/data/transactions.csv", true)) {
-            try (BufferedWriter bw = new BufferedWriter(fw)) {
+        try (FileWriter fileWriter = new FileWriter("src/data/transactions.csv", true)) {
+            try (BufferedWriter bufferedWriter = new BufferedWriter(fileWriter)) {
 
                 LocalDateTime now = LocalDateTime.now();
                 DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("yyyy-MM-dd");
@@ -68,8 +69,9 @@ public class App {
                 String time = now.format(timeFormat);
 
                 String line = String.format("%s|%s|%s|%s|%.2f|%s", date, time, description, vendor, amount, accountType);
-                bw.write(line);
-                bw.newLine();
+
+                bufferedWriter.write(line);
+                bufferedWriter.newLine();
 
                 System.out.println("✅ Transaction saved!");
             }
@@ -82,15 +84,15 @@ public class App {
         System.out.println("\nAdd Deposit");
         System.out.println("---------------------");
 
+        System.out.print("Enter vendor: ");
+        String vendor = scanner.nextLine();
+
         System.out.println("Please enter your deposit amount: ");
         double amount = Double.parseDouble(scanner.nextLine());
 
-        System.out.print("Enter vendor (where it's from): ");
-        String vendor = scanner.nextLine();
-
-        System.out.print("Is this for checking or savings? ");
+        System.out.print("Enter account type(checking/savings):  ");
         String accountType = scanner.nextLine();
-    // use for make payment to write payment to file
+        // use for make payment to write payment to file
         writeTransaction("Deposit", vendor, amount, accountType);
 
         promptReturnToMainMenu();
@@ -100,14 +102,15 @@ public class App {
         System.out.println("\nMake Payment");
         System.out.println("---------------------");
 
+        System.out.print("Enter vendor: ");
+        String vendor = scanner.nextLine();
+
         System.out.println("Please enter your payment amount: ");
         double amount = Double.parseDouble(scanner.nextLine());
         // setting amount to absolute value with a negative so that
         // even if you forget the negative it will read as negative
         amount = Math.abs(amount);
         amount = -amount;
-        System.out.print("Enter vendor (where it's from): ");
-        String vendor = scanner.nextLine();
 
         String accountType = "checking";
         // use for make payment to write payment to file
@@ -115,37 +118,36 @@ public class App {
         promptReturnToMainMenu();
     }
 
-    public static void  showLedgerMenu() {
+    public static void showLedgerMenu() {
         boolean running = true;
         while (running) {
             System.out.println("\nLedger");
             System.out.println("---------------------");
             System.out.println("\nWhat ledger would you like to view?");
-            System.out.println("A- All");
-            System.out.println("D- Deposits ");
-            System.out.println("P- Payments ");
-            System.out.println("R- Reports ");
-            System.out.println("L- Return to the Ledger Menu.");
+            System.out.println("A) All");
+            System.out.println("D) Deposits");
+            System.out.println("P) Payments ");
+            System.out.println("R) Reports ");
+            // new reports screen but not sure where it goes
+            System.out.println("H) Home ");
             System.out.println("Enter here: ");
 
-            String selectedMenuOption = scanner.nextLine();
+            String selectedMenuOption = scanner.nextLine().toUpperCase();
 
-            switch (selectedMenuOption.toUpperCase()) {
+            switch (selectedMenuOption) {
                 case "A":
-                    //may need to go in Ledger window
                     runAll();
                     break;
                 case "D":
-                    //may need to go in ledger window
                     runDeposits();
                     break;
                 case "P":
                     runPayments();
                     break;
                 case "R":
-                    runReports();
+                    viewReports();
                     break;
-                case "L":
+                case "H":
                     running = false;
                     break;
                 default:
@@ -154,44 +156,199 @@ public class App {
         }
     }
 
-    private static void runReports() {
+    public static void viewReports() {
+        boolean viewReports = true;
+
+        while (viewReports) {
+            System.out.println("\nReports");
+            System.out.println("---------------------");
+            System.out.println("1- Month to Date");
+            System.out.println("2- Previous Month");
+            System.out.println("3- Year To Date");
+            System.out.println("4- Previous Year");
+            System.out.println("5- Search by Vendor");
+            System.out.println("0- Back to Ledger");
+            System.out.println("Enter here: ");
+
+            String selectedReportOption = scanner.nextLine();
+
+            switch (selectedReportOption) {
+                case "1":
+                    runMonthToDate();
+                    break;
+                case "2":
+                    runPreviousMonth();
+                    break;
+                case "3":
+                    runYearToDate();
+                    break;
+                case "4":
+                    runPreviousYear();
+                    break;
+                case "5":
+                    runSearchByVendor();
+                    break;
+                case "0":
+                    viewReports = false;
+                    break;
+                default:
+                    System.out.println("Invalid selection.");
+            }
+        }
     }
 
     private static void promptReturnToLedgerMenu() {
-            System.out.println("\nPress Enter to return to the ledger menu...");
-            scanner.nextLine();
+        System.out.println("\nPress Enter to return to the ledger menu...");
+        scanner.nextLine();
+    }
+
+    public static void runAll() {
+        System.out.println("\nALL TRANSACTIONS");
+        System.out.println("---------------------");
+
+        List<String[]> transactions = readAllTransactions();
+        Collections.reverse(transactions);  // Newest first
+        for (String[] t : transactions) {
+            System.out.printf("%s %s | %s | %s | $%.2f | %s\n",
+                    t[0], t[1], t[2], t[3], Double.parseDouble(t[4]), t[5]);
         }
+        promptReturnToLedgerMenu();
+    }
 
-        public static void runAll() {
-            System.out.println("\n");
-            System.out.println("---------------------");
-            System.out.println();
-            System.out.println();
-            promptReturnToLedgerMenu();
+    private static List<String[]> readAllTransactions() {
+        List<String[]> transactions = new ArrayList<>();
+        try (BufferedReader reader = new BufferedReader(new FileReader("src/data/transactions.csv"))) {
+            String line;
+            while ((line = reader.readLine()) != null) {
+                String[] parts = line.split("\\|");
+                if (parts.length == 6) {  // Only include well-formed rows
+                    transactions.add(parts);
+                }
+            }
+        } catch (IOException e) {
+            System.out.println("⚠️ Error reading transactions: " + e.getMessage());
         }
+        return transactions;
+    }
 
-        private static void runDeposits() {
-            System.out.println("\n");
-            System.out.println("---------------------");
-            System.out.println();
-            System.out.println();
-            promptReturnToLedgerMenu();
+    private static void runDeposits() {
+        System.out.println("\nDEPOSIT TRANSACTIONS");
+        System.out.println("---------------------");
+
+        List<String[]> transactions = readAllTransactions();
+        Collections.reverse(transactions);
+
+        for (String[] t : transactions) {
+            String description = t[2].trim(); // t[2] = description field
+            if (description.equalsIgnoreCase("Deposit")) {
+                System.out.printf("%s %s | %s | %s | $%.2f | %s\n",
+                        t[0], t[1], t[2], t[3], Double.parseDouble(t[4]), t[5]);
+            }
         }
+        promptReturnToLedgerMenu();
+    }
 
-        public static void runPayments() {
-            System.out.println("\n");
-            System.out.println("---------------------");
-            System.out.println();
-            System.out.println();
-            promptReturnToLedgerMenu();
+    public static void runPayments() {
+        System.out.println("\nPAYMENT TRANSACTIONS");
+        System.out.println("---------------------");
 
-//        private static void runReports() {
-//            System.out.println("\nTransactions within the last 24 hours.");
-//            System.out.println("---------------------");
-//            System.out.println();
-//            System.out.println();
-//            promptReturnToLedgerMenu();
-//            } month to date etc.
+        List<String[]> transactions = readAllTransactions();
+        Collections.reverse(transactions);
+
+        for (String[] t : transactions) {
+            String description = t[2].trim(); // t[2] = description field
+            if (description.equalsIgnoreCase("Payment")) {
+                System.out.printf("%s %s | %s | %s | $%.2f | %s\n",
+                        t[0], t[1], t[2], t[3], Double.parseDouble(t[4]), t[5]);
+
+            }
+        }
+        promptReturnToLedgerMenu();
+    }
+
+    // Try/catch and or buffered reader to pull info from the transaction.csv file
+    private static void runMonthToDate() {
+        System.out.println("\nMONTH TO DATE");
+        System.out.println("---------------------");
+
+        List<String[]> transactions = readAllTransactions();
+
+        String currentMonth = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM"));
+
+        for (String[] t : transactions) {
+            String date = t[0]; // "2025-04-28"
+            if (date.startsWith(currentMonth)) {
+                printTransaction(t);
+            }
+        }
+        promptReturnToLedgerMenu();
+    }
+
+    //delete if it doesn't work
+    private static void printTransaction(String[] t) {
+    }
+
+    private static void runPreviousMonth() {
+        System.out.println("\nPREVIOUS MONTH");
+        System.out.println("---------------------");
+        LocalDateTime now = LocalDateTime.now().minusMonths(1);
+        String prevMonth = now.format(DateTimeFormatter.ofPattern("yyyy-MM"));
+
+        List<String[]> transactions = readAllTransactions();
+        for (String[] t : transactions) {
+            if (t[0].startsWith(prevMonth)) {
+                printTransaction(t);
             }
         }
 
+        promptReturnToLedgerMenu();
+    }
+
+    private static void runYearToDate() {
+        System.out.println("\nYEAR TO DATE");
+        System.out.println("---------------------");
+
+        String currentYear = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy"));
+
+        List<String[]> transactions = readAllTransactions();
+        for (String[] t : transactions) {
+            if (t[0].startsWith(currentYear)) {
+                printTransaction(t);
+            }
+        }
+
+        promptReturnToLedgerMenu();
+    }
+
+    private static void runPreviousYear() {
+        System.out.println("\nPREVIOUS YEAR");
+        System.out.println("---------------------");
+        String prevYear = LocalDateTime.now().minusYears(1).format(DateTimeFormatter.ofPattern("yyyy"));
+
+        List<String[]> transactions = readAllTransactions();
+        for (String[] t : transactions) {
+            if (t[0].startsWith(prevYear)) {
+                printTransaction(t);
+            }
+        }
+
+        promptReturnToLedgerMenu();
+    }
+
+    private static void runSearchByVendor() {
+        System.out.println("\nSEARCH BY VENDOR");
+        System.out.println("---------------------");
+        System.out.print("Enter vendor name to search: ");
+        String keyword = scanner.nextLine().toLowerCase();
+
+        List<String[]> transactions = readAllTransactions();
+        for (String[] t : transactions) {
+            String vendor = t[3].toLowerCase();
+            if (vendor.contains(keyword)) {
+                printTransaction(t);
+            }
+        }
+        promptReturnToLedgerMenu();
+
+    }
+}
